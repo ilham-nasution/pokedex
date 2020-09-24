@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 
+// Color Variable
 $green: #77bfa3;
 $red: #cc704e;
 $blue: #7893e7;
@@ -7,6 +8,7 @@ $gray: #9ab0a6;
 $white-shade: #ffffff60;
 $text-primary: #001b00;
 
+// Global Styling
 body {
   font-family: "Lato", sans-serif;
   margin: 0;
@@ -18,90 +20,151 @@ body {
   margin: 16px;
 }
 
+p {
+  margin: 0;
+}
+
+h1 {
+  margin: 4px 0px;
+}
+
+button {
+  border: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  margin: 16px 0px;
+  p:first-child {
+    flex-basis: calc(8px * 17);
+  }
+  p {
+    flex-basis: calc(8px * 7);
+  }
+}
+
+// Component
+.stats {
+  margin-top: 24px;
+}
+
+@mixin btn-type-base {
+  background-color: $white-shade;
+  font-size: 8px;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+.btn-type {
+  @include btn-type-base;
+  display: inline;
+  margin-right: 4px;
+}
+
+.btn-type-block {
+  @include btn-type-base;
+  display: block;
+  margin: 4px 0;
+}
+
 .modal {
   height: 100vh;
-  background-color: $green;
-  .close-btn {
+  background-color: white;
+  &-green {
+    height: 100vh;
+    background-color: $green;
+  }
+  &-red {
+    height: 100vh;
+    background-color: $red;
+  }
+  &-blue {
+    height: 100vh;
+    background-color: $blue;
+  }
+  &-gray {
+    height: 100vh;
+    background-color: $gray;
+  }
+  &-btn-close {
     background-color: transparent;
-    border: none;
     font-size: 24px;
+    height: 5%;
   }
-  .custom {
-    background-color: whitesmoke;
-  }
-  .modal-content {
+  &-content-top {
     position: relative;
-    height: 50%;
-    border-radius: 16px 16px 0px 0px;
+    padding: 0px 16px;
+    height: 35%;
     img {
       position: absolute;
-      bottom: -16px;
-      left: 30%;
-      width: 136px;
-      height: 136px;
+      bottom: -40px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: calc(8px * 22);
+      height: calc(8px * 22);
       z-index: 2;
     }
-    .tabs {
-      display: flex;
-      justify-content: space-evenly;
-      p {
-        margin: 0px;
-        font-size: 16px;
-      }
-      .active {
-        border-bottom: 1px solid black;
-      }
+  }
+  &-content-bottom {
+    padding: 0px 16px;
+    height: 60%;
+    border-radius: 16px 16px 0px 0px;
+    background-color: whitesmoke;
+  }
+  &-content-tabs {
+    display: flex;
+    justify-content: space-evenly;
+    p {
+      font-size: 16px;
+      margin-top: 48px;
+    }
+    .active {
+      padding-bottom: 8px;
+      font-weight: 900;
+      border-bottom: 1px solid black;
     }
   }
 }
 
-.card-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(136px, 1fr));
-  gap: 8px;
-  .card {
-    background-color: whitesmoke;
+@mixin card-base {
+  display: flex;
+  padding: 8px;
+  justify-content: space-between;
+  border-radius: 4px;
+  box-shadow: 1px 1px 4px rgb(140, 140, 140);
+  p {
+    font-size: 12px;
+    font-weight: 700;
   }
-  .card-green {
+  img {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+.card {
+  @include card-base;
+  background-color: whitesmoke;
+  &-green {
+    @include card-base;
     background-color: $green;
   }
-  .card-red {
+  &-red {
+    @include card-base;
     background-color: $red;
   }
-  .card-blue {
+  &-blue {
+    @include card-base;
     background-color: $blue;
   }
-  .card-gray {
+  &-gray {
+    @include card-base;
     background-color: $gray;
   }
-  .card,
-  .card-green,
-  .card-red,
-  .card-blue,
-  .card-gray {
-    display: flex;
-    padding: 8px;
-    justify-content: space-between;
-    border-radius: 4px;
-    box-shadow: 1px 1px 4px rgb(140, 140, 140);
-    p {
-      margin: 0;
-      font-size: 12px;
-      font-weight: 700;
-    }
-    .type-btn {
-      background: $white-shade;
-      text-align: center;
-      font-size: 8px;
-      font-weight: 400;
-      border-radius: 8px;
-      margin: 4px 0px;
-      padding: 4px;
-      width: 32px;
-    }
-    img {
-      width: 56px;
-      height: 56px;
-    }
+  &-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(136px, 1fr));
+    gap: 8px;
   }
 }

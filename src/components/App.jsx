@@ -34,27 +34,28 @@ const App = () => {
 
   return (
     <>
-      {showModal && (
+      {showModal ? (
         <PokeDetail pokemon={pokemon} setShowModal={setShowModal} />
+      ) : (
+        <div className="container">
+          <h1>Pokedex</h1>
+          <img
+            src="https://www.freeiconspng.com/uploads/pokeball-pokemon-ball-png-images-4.png"
+            alt="pokedex"
+            width="136px"
+            height="136px"
+            style={{
+              position: "fixed",
+              right: "-32px",
+              top: "-32px",
+              transform: "rotate(40deg)",
+              opacity: 0.2,
+              zIndex: -1,
+            }}
+          />
+          <PokeCardList pokemons={pokemons} handleGetDetail={handleGetDetail} />
+        </div>
       )}
-      <div className="container">
-        <h1>Pokedex</h1>
-        <img
-          src="https://lh3.googleusercontent.com/proxy/m7FsONW6qPijjKm9goxM5sVqDTaeJv8FLVt9rBKw0AfoweHFzoasBhMpOeKHErAQIBOM575GXDoFIcpcWaVj_n91vQx10-qS82YN8Hs3HXubj0i9I4CmtSux4iu8XAbrYA"
-          alt="pokedex"
-          width="136px"
-          height="136px"
-          style={{
-            position: "fixed",
-            right: "-32px",
-            top: "-32px",
-            transform: "rotate(40deg)",
-            opacity: 0.2,
-            zIndex: -1,
-          }}
-        />
-        <PokeCardList pokemons={pokemons} handleGetDetail={handleGetDetail} />
-      </div>
     </>
   );
 };

@@ -1,31 +1,81 @@
 import React from "react";
 
 const PokeDetail = ({ pokemon, setShowModal }) => {
+  let modal;
+
+  switch (pokemon.types[0].type.name) {
+    case "grass":
+    case "bug":
+      modal = "modal-green";
+      break;
+
+    case "fire":
+      modal = "modal-red";
+      break;
+
+    case "water":
+      modal = "modal-blue";
+      break;
+
+    case "normal":
+      modal = "modal-gray";
+      break;
+
+    default:
+      modal = "modal";
+      break;
+  }
+
   const capitalize = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <button className="close-btn" onClick={() => setShowModal(false)}>
-          <i class="fas fa-long-arrow-alt-left"></i> back
-        </button>
+    <div className={modal}>
+      <button className="modal-btn-close" onClick={() => setShowModal(false)}>
+        <i className="fas fa-long-arrow-alt-left"></i>
+      </button>
+      <div className="modal-content-top">
         <h1>{capitalize(pokemon.name)}</h1>
         {pokemon.types.map((type) => (
-          <p key={type.slot} className="type-btn">
+          <button key={type.slot} className="btn-type">
             {type.type.name}
-          </p>
+          </button>
         ))}
         <img
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`}
           alt="pokemon"
         />
       </div>
-      <div className="modal-content custom">
-        <div className="tabs">
+      <div className="modal-content-bottom">
+        <div className="modal-content-tabs">
           <p className="active">stats</p>
           <p>moves</p>
+        </div>
+        <div className="stats">
+          {pokemon.stats.map((stat, index) => (
+            <div key={index} className="row">
+              <p>{stat.stat.name}</p>
+              <p>{stat.base_stat}</p>
+              <div
+                style={{
+                  backgroundColor: "lightgray",
+                  width: 100,
+                  height: 10,
+                  borderRadius: "4px",
+                }}
+              >
+                <div
+                  style={{
+                    height: 10,
+                    width: stat.base_stat,
+                    backgroundColor: "#001b00",
+                    borderRadius: "4px",
+                  }}
+                ></div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

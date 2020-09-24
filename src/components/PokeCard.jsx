@@ -36,9 +36,9 @@ const PokeCard = ({ pokemon, handleGetDetail }) => {
         <div className="card-column">
           <p>{capitalize(pokemon.name)}</p>
           {pokemon.types.map((type) => (
-            <p key={type.slot} className="type-btn">
+            <button key={type.slot} className="btn-type-block">
               {type.type.name}
-            </p>
+            </button>
           ))}
         </div>
         <div className="card-column">
