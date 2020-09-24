@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 const PokeDetail = ({ pokemon, setShowModal }) => {
+  const [tabs, setTabs] = useState("stats");
   let modal;
 
   switch (pokemon.types[0].type.name) {
@@ -26,6 +27,53 @@ const PokeDetail = ({ pokemon, setShowModal }) => {
       break;
   }
 
+  const renderSwitch = (tabs) => {
+    switch (tabs) {
+      case "stats":
+        return (
+          <div className="stats">
+            {pokemon.stats.map((stat, index) => (
+              <div key={index} className="row">
+                <p>{stat.stat.name}</p>
+                <p>{stat.base_stat}</p>
+                <div
+                  style={{
+                    backgroundColor: "lightgray",
+                    width: 100,
+                    height: 10,
+                    borderRadius: "4px",
+                  }}
+                >
+                  <div
+                    style={{
+                      height: 10,
+                      width: stat.base_stat,
+                      backgroundColor: "#001b00",
+                      borderRadius: "4px",
+                    }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+
+      case "moves":
+        return (
+          <div className="moves">
+            {pokemon.moves.map((move, index) => (
+              <p key={index} className="btn-move">
+                {move.move.name}
+              </p>
+            ))}
+          </div>
+        );
+
+      default:
+        console.log("Can't find case");
+    }
+  };
+
   const capitalize = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
@@ -49,34 +97,20 @@ const PokeDetail = ({ pokemon, setShowModal }) => {
       </div>
       <div className="modal-content-bottom">
         <div className="modal-content-tabs">
-          <p className="active">stats</p>
-          <p>moves</p>
+          <p
+            onClick={() => setTabs("stats")}
+            className={tabs === "stats" ? "active" : undefined}
+          >
+            Stats
+          </p>
+          <p
+            onClick={() => setTabs("moves")}
+            className={tabs === "moves" ? "active" : undefined}
+          >
+            Moves
+          </p>
         </div>
-        <div className="stats">
-          {pokemon.stats.map((stat, index) => (
-            <div key={index} className="row">
-              <p>{stat.stat.name}</p>
-              <p>{stat.base_stat}</p>
-              <div
-                style={{
-                  backgroundColor: "lightgray",
-                  width: 100,
-                  height: 10,
-                  borderRadius: "4px",
-                }}
-              >
-                <div
-                  style={{
-                    height: 10,
-                    width: stat.base_stat,
-                    backgroundColor: "#001b00",
-                    borderRadius: "4px",
-                  }}
-                ></div>
-              </div>
-            </div>
-          ))}
-        </div>
+        {renderSwitch(tabs)}
       </div>
     </div>
   );

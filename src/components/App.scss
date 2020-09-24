@@ -36,17 +36,27 @@ button {
   display: flex;
   align-items: center;
   margin: 16px 0px;
+
   p:first-child {
     flex-basis: calc(8px * 17);
   }
   p {
     flex-basis: calc(8px * 7);
+    flex-grow: 1;
   }
 }
 
 // Component
 .stats {
-  margin-top: 24px;
+  max-width: calc(8px * 40);
+  margin: 32px auto;
+}
+
+.moves {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 16px;
 }
 
 @mixin btn-type-base {
@@ -65,6 +75,12 @@ button {
   @include btn-type-base;
   display: block;
   margin: 4px 0;
+}
+
+.btn-move {
+  @include btn-type-base;
+  box-shadow: 1px 1px 3px rgb(140, 140, 140);
+  margin: 4px;
 }
 
 .modal {
@@ -87,6 +103,8 @@ button {
     background-color: $gray;
   }
   &-btn-close {
+    cursor: pointer;
+    outline: none;
     background-color: transparent;
     font-size: 24px;
     height: 5%;
@@ -108,7 +126,7 @@ button {
   }
   &-content-bottom {
     padding: 0px 16px;
-    height: 60%;
+    min-height: 60%;
     border-radius: 16px 16px 0px 0px;
     background-color: whitesmoke;
   }
@@ -118,6 +136,7 @@ button {
     p {
       font-size: 16px;
       margin-top: 48px;
+      cursor: pointer;
     }
     .active {
       padding-bottom: 8px;
@@ -133,6 +152,7 @@ button {
   justify-content: space-between;
   border-radius: 4px;
   box-shadow: 1px 1px 4px rgb(140, 140, 140);
+  cursor: pointer;
   p {
     font-size: 12px;
     font-weight: 700;
